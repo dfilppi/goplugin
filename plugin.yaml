@@ -2,7 +2,7 @@ plugins:
 
   goplugin:
     executor: central_deployment_agent
-    source: goplugin
+    source: https://github.com/dfilppi/goplugin/archive/master.zip
 
 node_types:
 
