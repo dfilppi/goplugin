@@ -1,0 +1,26 @@
+plugins:
+
+  goplugin:
+    executor: central_deployment_agent
+    source: goplugin
+
+node_types:
+
+  golang.Test:
+    derived_from: cloudify.nodes.Root
+    properties:
+      prop1:
+        type: string
+      prop2:
+        type: integer
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: goplugin.golang_adapter.go.callgo
+          inputs:
+            func:
+              description: the go function to call
+              type: string
+            args:
+              description: arg dict to pass
+              default: {}
