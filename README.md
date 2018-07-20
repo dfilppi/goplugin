@@ -10,10 +10,12 @@ This example plugin is meant to be a starting point for those interested in deve
 * there is a little framework code in Go to multiplex the operation request, and to bridge to the Cloudify context.
 * the Cloudify context is accessed from Go using the context proxy, similar to the script plugin.  This means all strings in and out.
 * the actual implementations in the example are in the `golang_adapter\src\plugin\operation.go` file.
+* it is assumed that the target platform already has Go installed.
 
 ### Example
 
 To run the example, you just need a Cloudify CLI ( `pip install cloudify`):
+* install Go
 * cd to the example directory
 * run `cfy init -r local-blueprint.yaml --install-plugins`
 * run `cfy exe start install -b goplugin`
