@@ -10,6 +10,9 @@ import (
 //  arg[1] = port of context proxy ( provided by go.py )
 //  arg[2] = the function to call
 //  arg[3:] = the args for the function if any
+
+// Exiting with 1 indicates recoverable error.
+// Exiting with 2 indicates nonrecoverable error.
 func main() {
 
 	// By convention, args[1] is a function name.  The equivalent to
@@ -25,6 +28,6 @@ func main() {
 		func2(ctx_port, args)
 	} else {
 		fmt.Println("Function " + fname + " not found")
-		os.Exit(1)
+		os.Exit(2) // Non-recoverable error
 	}
 }

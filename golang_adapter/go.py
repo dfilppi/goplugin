@@ -1,5 +1,5 @@
 from cloudify.decorators import operation
-from cloudify.exceptions import NonRecoverableError
+from cloudify.exceptions import NonRecoverableError, RecoverableError
 from cloudify import ctx
 from cloudify.proxy.server import HTTPCtxProxy
 from functools import wraps
@@ -51,7 +51,9 @@ def callgo( func, args , **kwargs):
     exepath = ctx.instance.runtime_properties['plugin_path']
     # below will fail on windows
     res = subprocess.call([ exepath , str(proxy_server.port), func, json.dumps( args )])
-    if res !=0 :
-      raise NonRecoverableError("func {} execution faild".format(func))
+    if res == 1 :
+      raise RecoverableError("func {} execution failed".format(func))
+    if res == 2 :
+      raise NonRecoverableError("func {} execution failed".format(func))
   finally:
     proxy_server.close()
